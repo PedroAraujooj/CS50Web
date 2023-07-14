@@ -1,0 +1,44 @@
+body{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    height: 100%;
+}
+main{
+    height: 84vh;
+    display: inline-block;
+    vertical-align: auto;
+    text-align: center;
+    width: 100vw;
+}
+nav{
+    height: 9vh;
+    display:block;
+}
+
+#logo{
+    margin-top: 100px;
+    width: 500px;
+}
+
+li{
+    display: inline-block;
+    margin: 10px;
+}
+ul{
+    text-align: right;
+}
+input{
+    border-radius: 10px;
+}
+.logoAdv{
+    display:inline-block;
+    width: 20vw;
+}
+.barrAdv{
+    display:inline-block;
+    width: 75vw;    
+}
+label{
+    width: 280px;
+}
