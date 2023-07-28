@@ -1,0 +1,16 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Create Listining</h2>
+    <form action="{% url 'createListining' %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="title" required placeholder="title">
+        <br>
+        <textarea name="text"  cols="70" rows="10" placeholder="description"></textarea>
+        <br>
+        <input type="number" name="bid" required placeholder="Initial bid">
+        <input type="text" name="category" required placeholder="Category">
+        <input type="text" name="url" placeholder="Image's link">
+        <input type="submit">
+    </form>
+{% endblock %}

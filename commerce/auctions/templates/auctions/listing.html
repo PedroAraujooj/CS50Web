@@ -1,0 +1,89 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Listing: {{ listing.title }}</h2>
+    <button id="addWatch">
+    {% if listing in user.watchList.all %}
+        <a href="{% url 'watch' listing.id  %}"><p class="watch" title="Remove of watchlist">Watchlist</p></a>
+    {% else %}
+        <a href="{% url 'watch' listing.id  %}"><p class="watch" title="Add in watchlist">Add in watchlist</p></a>
+    {% endif %}
+    </button>
+    {% if listing.imageUrl %}
+        <img src="{{ listing.imageUrl }}" alt="{{ listing.title }}" style="display: block; max-height: 500px">
+    {% endif %}
+    <h6>{{ listing.text }}</h6>
+
+    {% if listing.active == True %}
+
+        {% if bids %}
+            <h5><strong>$</strong>{{ bids.first.value|floatformat:2 }}</h5>
+        {% else %}
+            <h5><strong>$</strong>{{ listing.startingBid|floatformat:2 }}</h5>
+        {% endif %}
+        {% if bids %}
+            <p>{{ bids|length }}(s) so far.
+            {% if bids.first.user == user %}
+                Your bid is the current bid
+            {% endif %}
+            </p>
+        {% endif %}
+        <form action="{% url 'bid' listing.id  %}" method="post">
+        {% csrf_token %}
+            <input type="text" required placeholder="Bid" name="bid" id="bid">
+            <br>
+            <input type="submit" value="Place Bid" id="placeBid">
+        </form>
+
+        {% if listing.users.first == user %}
+            {#TODO#}
+            <form action="{% url 'close' listing.id  %}" method="post">
+            {% csrf_token %}
+                <input type="submit" value="Close auction" id="closeAuc">
+            </form>
+        {% else %}
+        {% endif %}
+        <h5>Details</h5>
+        <ul>
+            <li>Listed by: {{ listing.users.all.first.username }}</li>
+            {% if listing.categories.all %}
+                <li>Category:
+                    {% for category in listing.categories.all%}
+                        <a href="{% url 'categoriesListing' category.id%}">{{ category.name }}</a>
+                    {% endfor %}
+                </li>
+            {% else %}
+                <li>Category: No Category Listed</li>
+            {% endif %}
+
+        </ul>
+        <hr>
+        <form action="{% url 'comment' listing.id%}" method="post">
+        {% csrf_token %}
+            <textarea name="comment" cols="100" rows="5"></textarea>
+            <br>
+            <input type="submit" value="Add Comment">
+        </form>
+        {% if  not listing.comments.all %}
+            <p>No comments yet</p>
+        {% else %}
+            <h5>Comments</h5>
+            {% for comment in listing.comments.all %}
+                <h6>{{ comment }}</h6>
+            {% endfor %}
+
+        {% endif %}
+
+    {% elif bids and  listing.active == False %}
+        {% if  bids.first in user.bid.all %}
+            <h3>Congratulations! You are the winner!</h3>
+        {% else %}
+            <h3>Another person has already won the auction</h3>
+        {% endif %}
+    {% else %}
+        <h3>The owner closed the auction without any bids</h3>
+        {{ listing.active }}
+    {% endif %}
+
+
+{% endblock %}

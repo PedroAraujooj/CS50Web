@@ -1,0 +1,28 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Category: {{ name }}</h2>
+    <ul class ="itemList">
+    {% for item in itens %}
+        <li><a href="{% url 'listing' item.id %}"><div class="itemBar">
+        {% if item.imageUrl %}
+            <div class="item">
+                <img src="{{ item.imageUrl }}" alt="{{ item.title }}">
+            </div >
+        {% endif %}
+
+            <div class="item">
+                <h4>{{ item.title }}</h4>
+                {%  if item.bid.exist %}
+                    <h5><strong> Price: $</strong>{{ item.bid }}</h5>
+                {% else %}
+                    <h5><strong> Price: $</strong>{{ item.startingBid }}</h5>
+                {% endif %}
+                <h5>{{ item.text }}</h5>
+            </div>
+        </div></a></li>
+    {% empty %}
+        <li>No listings yet</li>
+    {% endfor %}
+    </ul>
+{% endblock %}

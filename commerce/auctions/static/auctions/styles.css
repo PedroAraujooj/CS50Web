@@ -1,0 +1,59 @@
+body {
+    padding: 10px;
+}
+.itemList li{
+    list-style: none;
+}
+.itemBar{
+    height: 30vh ;
+    width: 90vw;
+    margin: auto;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    display: flex;
+    align-items: flex-start;
+}
+.item{
+    display: inline-block;
+    width: 40vw;
+}
+.item img{
+    height: 29vh;
+    width: 40vw;
+}
+.itemList a{
+    text-decoration: none;
+    color: black;
+}
+
+#bid{
+    width: 98vw;
+    margin-bottom: 10px;
+}
+#placeBid{
+    width: 81px;
+    height: 35px;
+    color: white;
+    background-color: #2863fb;
+    border: 0px solid white;
+    border-radius: 3px;
+}
+#addWatch{
+    text-decoration: none;
+    background-color: gray;
+    height: 30px;
+    border-radius: 3px;
+    border: 0px solid white;
+}
+#addWatch a{
+    text-decoration: none;
+    color: white;
+}
+#closeAuc{
+    height: 35px;
+    color: white;
+    background-color: #ff0000;
+    border: 0px solid white;
+    border-radius: 3px;
+    margin-top: 21px;
+}
