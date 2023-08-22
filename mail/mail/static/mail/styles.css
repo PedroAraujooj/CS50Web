@@ -1,3 +1,29 @@
 textarea {
     min-height: 400px;
 }
+ul {
+    list-style: none;
+}
+li{
+
+    padding: 7px;
+}
+.info{
+    display: inline-block;
+    width: 50%;
+}
+.timestamp{
+    text-align: right;
+    display: inline-block;
+    width: 40%;
+    color: #a4a4a4;
+}
+.read{
+    background-color: #4d4d4d;
+}
+.liMail{
+    display: inline-block;
+    width: 91%;
+     border: 1px solid black;
+     padding: 7px;
+}
