@@ -1,0 +1,26 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+    <h1 style="padding-left: 7px">All Posts</h1>
+    <div class ="post" >
+        <h4>New Post</h4>
+        <form action="{% url 'index' %}" method="post">
+            {% csrf_token %}
+            <textarea name="text" rows="4" style="width: 100%"></textarea><br>
+            <input type="submit" value="Post" class="btn btn-primary">
+        </form>
+    </div>
+    {% if posts %}
+        {% for post in posts %}
+            <div class ="post" >
+                <h3>{{ post.text }}</h3>
+                {% if post.user == user %}
+                    <p>Edit</p>
+                {% endif %}
+                <p>{{ post.date }}</p>
+                <p>{{ post.likes }}</p>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+{% endblock %}

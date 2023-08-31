@@ -1,0 +1,27 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+    <h1 style="padding-left: 7px">Profile</h1>
+    <p>Following: {{ profileUser.following.all|length }}</p>
+    <p>Followers: {{ followers|length }}</p>
+    {% if user.id != profileUser.id and user in profileUser.following.all %}
+        <p>UNFOLLOW</p>
+    {% elif user.id != profileUser.id %}
+        <p>FOLLOW</p>
+    {% endif %}
+    {% if posts %}
+        {% for post in posts %}
+            <div class ="post" >
+                <h3>{{ post.text }}</h3>
+                {% if post.user == user %}
+                    <p>Edit</p>
+                {% endif %}
+                <p>{{ post.date }}</p>
+                <p>{{ post.likes }}</p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No post in your profile yet </p>
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,10 @@
+
+p{
+    margin: 0;
+}
+.post{
+    margin: 14px;
+    border: 2px solid gray;
+    border-radius: 14px;
+    padding: 14px;
+}
