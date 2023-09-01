@@ -5,20 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0ef7434a-8b6e-4365-966b-1b050aa891f8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../network/project4/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../network/project4/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../network/project4/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../network/project4/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../network/project4/.idea/project4.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../network/project4/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../network/project4/db.sqlite3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../network/project4/network/migrations/0001_initial.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../network/project4/network/migrations/0002_post_comment.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../network/project4/network/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../network/project4/network/templates/network/erro.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../network/project4/network/templates/network/profile.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../network/project4/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/../network/project4/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../network/project4/network/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../network/project4/network/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../network/project4/network/templates/network/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/../network/project4/network/templates/network/profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../network/project4/network/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/../network/project4/network/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../network/project4/network/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/../network/project4/network/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,7 +69,7 @@
       <workItem from="1689728543981" duration="1918000" />
       <workItem from="1689730546757" duration="2649000" />
       <workItem from="1689773004788" duration="55963000" />
-      <workItem from="1693348086022" duration="8056000" />
+      <workItem from="1693348086022" duration="11743000" />
     </task>
     <servers />
   </component>

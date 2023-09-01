@@ -28,11 +28,28 @@ def index(request):
 
 @login_required(login_url="login")
 def profile(request, userId):
+    print(f"followers: {User.objects.all().filter(following=User.objects.get(pk=userId))} ")
+    print(f"following: {User.objects.get(pk=userId).following} ")
     return render(request, "network/profile.html", {
         "posts": Post.objects.all().filter(user=User.objects.get(pk=userId)).order_by('-id'),
         "profileUser": User.objects.get(pk=userId),
         "followers": User.objects.all().filter(following=User.objects.get(pk=userId))
     })
+
+
+def switch(request, userId):
+    if request.method == "POST":
+        following = request.POST["following"]
+        if following == 'true':
+            User.objects.get(pk=request.user.id).following.remove(User.objects.get(pk=userId))
+            return HttpResponseRedirect(reverse('profile', args=(userId,)))
+        elif following == 'false':
+            User.objects.get(pk=request.user.id).following.add(User.objects.get(pk=userId))
+            return HttpResponseRedirect(reverse('profile', args=(userId,)))
+        else:
+            return render(request, "network/erro.html", {
+                "error": "Something went wrong"
+            })
 
 
 def login_view(request):

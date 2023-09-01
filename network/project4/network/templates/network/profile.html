@@ -4,10 +4,18 @@
     <h1 style="padding-left: 7px">Profile</h1>
     <p>Following: {{ profileUser.following.all|length }}</p>
     <p>Followers: {{ followers|length }}</p>
-    {% if user.id != profileUser.id and user in profileUser.following.all %}
-        <p>UNFOLLOW</p>
+    {% if user.id != profileUser.id and user in followers %}
+        <form action="{% url 'switch'  profileUser.id %}" method="post">
+        {% csrf_token %}
+            <input type="text"  name="following" hidden value= 'true'>
+            <input type="submit" value="Unfollow">
+        </form>
     {% elif user.id != profileUser.id %}
-        <p>FOLLOW</p>
+        <form action="{% url 'switch' profileUser.id %}" method="post">
+        {% csrf_token %}
+            <input type="text"  name="following" hidden value= 'false'>
+            <input type="submit" value="Follow">
+        </form>
     {% endif %}
     {% if posts %}
         {% for post in posts %}
