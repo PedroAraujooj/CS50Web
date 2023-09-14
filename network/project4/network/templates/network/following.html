@@ -1,31 +1,15 @@
 {% extends "network/layout.html" %}
 {% load static %}
 
+
 {% block body %}
     <div class="main">
-    <h1 style="padding-left: 7px">Profile</h1>
-    <p>Following: {{ profileUser.following.all|length }}</p>
-    <p>Followers: {{ followers|length }}</p>
-    {% if user.id != profileUser.id and user in followers %}
-        <form action="{% url 'switch'  profileUser.id %}" method="post">
-        {% csrf_token %}
-            <input type="text"  name="following" hidden value= 'true'>
-            <input type="submit" value="Unfollow">
-        </form>
-    {% elif user.id != profileUser.id %}
-        <form action="{% url 'switch' profileUser.id %}" method="post">
-        {% csrf_token %}
-            <input type="text"  name="following" hidden value= 'false'>
-            <input type="submit" value="Follow">
-        </form>
-    {% endif %}
+    <h1 style="padding-left: 7px">Following</h1>
+
     {% if posts %}
         {% for post in posts %}
-            <div class ="post"  >
+             <div class ="post"  >
                 <div id = {{ post.id }}><h3>{{ post.text }}</h3>
-                {% if post.user == user %}
-                    <p onclick="edit({{ user.id }},{{ post.id }})" class="edit">Edit</p>
-                {% endif %}
                 </div>
                 <p>{{ post.date }}</p>
                 <div id="like-{{ post.id }}"><p><img
@@ -38,8 +22,6 @@
                 </div>
             </div>
         {% endfor %}
-    {% else %}
-        <p>No post in your profile yet </p>
     {% endif %}
     </div>
 
@@ -62,4 +44,5 @@
     </span>
     </div>
     </div>
+
 {% endblock %}

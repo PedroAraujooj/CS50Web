@@ -8,3 +8,15 @@ p{
     border-radius: 14px;
     padding: 14px;
 }
+
+.like{
+    width: 21px;
+}
+.pagination{
+    display: flex;
+    justify-content: center;
+}
+
+.main{
+    min-height: 85vh;
+}

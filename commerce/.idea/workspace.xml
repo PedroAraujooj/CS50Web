@@ -5,9 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0ef7434a-8b6e-4365-966b-1b050aa891f8" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../network/project4/network/static/imgs/no.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../network/project4/network/static/imgs/yes.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../network/project4/network/static/network/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../network/project4/network/templates/network/following.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../network/project4/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/../network/project4/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../network/project4/network/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../network/project4/network/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../network/project4/network/static/network/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/../network/project4/network/static/network/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../network/project4/network/templates/network/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../network/project4/network/templates/network/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../network/project4/network/templates/network/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/../network/project4/network/templates/network/layout.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../network/project4/network/templates/network/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/../network/project4/network/templates/network/profile.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../network/project4/network/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/../network/project4/network/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../network/project4/network/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/../network/project4/network/views.py" afterDir="false" />
@@ -69,7 +76,7 @@
       <workItem from="1689728543981" duration="1918000" />
       <workItem from="1689730546757" duration="2649000" />
       <workItem from="1689773004788" duration="55963000" />
-      <workItem from="1693348086022" duration="11743000" />
+      <workItem from="1693348086022" duration="15926000" />
     </task>
     <servers />
   </component>

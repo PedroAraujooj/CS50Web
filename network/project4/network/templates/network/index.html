@@ -1,6 +1,8 @@
 {% extends "network/layout.html" %}
+{% load static %}
 
 {% block body %}
+    <div class="main">
     <h1 style="padding-left: 7px">All Posts</h1>
     <div class ="post" >
         <h4>New Post</h4>
@@ -10,17 +12,48 @@
             <input type="submit" value="Post" class="btn btn-primary">
         </form>
     </div>
+{#    <form>#}
+{#        <textarea placeholder=""></textarea>#}
+{#        <input type="submit" class="btn btn-primary" id="editPost" value="Edit">#}
+{#    </form>#}
     {% if posts %}
         {% for post in posts %}
-            <div class ="post" >
-                <h3>{{ post.text }}</h3>
+            <div class ="post"  >
+                <div id = {{ post.id }}><h3>{{ post.text }}</h3>
                 {% if post.user == user %}
-                    <p>Edit</p>
+                    <p onclick="edit({{ user.id }},{{ post.id }})" class="edit">Edit</p>
                 {% endif %}
+                </div>
                 <p>{{ post.date }}</p>
-                <p>{{ post.likes }}</p>
+                <div id="like-{{ post.id }}"><p><img
+                         {% if user in post.likes.all %}
+                             src="{% static 'imgs/yes.png' %}"
+                        {% else %}
+                             src="{% static 'imgs/no.png' %}"
+                        {% endif %}
+                        alt="like" id = "like-{{ post.id }}-img" class="like" onclick="like(event,{{ post.id }}, {{ post.likes.all|length }})">{{ post.likes.all|length }}</p>
+                </div>
             </div>
         {% endfor %}
     {% endif %}
+    </div>
+    <div class="pagination">
+    <div>
+    <span class="step-links">
+        {% if posts.has_previous %}
+            <a href="?page=1" class="btn btn-primary">&laquo; first</a>
+            <a href="?page={{ posts.previous_page_number }} " class="btn btn-primary">previous</a>
+        {% endif %}
 
+        <span class="current">
+            Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
+        </span>
+
+        {% if posts.has_next %}
+            <a href="?page={{ posts.next_page_number }}" class="btn btn-primary">next</a>
+            <a href="?page={{ posts.paginator.num_pages }}" class="btn btn-primary">last &raquo;</a>
+        {% endif %}
+    </span>
+    </div>
+    </div>
 {% endblock %}
