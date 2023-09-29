@@ -4,25 +4,27 @@
 {% block body %}
     <div class="main">
     <h1 style="padding-left: 7px">Profile</h1>
-    <p>Following: {{ profileUser.following.all|length }}</p>
-    <p>Followers: {{ followers|length }}</p>
+    <p style="padding-left: 7px">Following: {{ profileUser.following.all|length }}</p>
+    <p style="padding-left: 7px">Followers: {{ followers|length }}</p>
     {% if user.id != profileUser.id and user in followers %}
         <form action="{% url 'switch'  profileUser.id %}" method="post">
         {% csrf_token %}
             <input type="text"  name="following" hidden value= 'true'>
-            <input type="submit" value="Unfollow">
+            <input style="margin-left: 7px" type="submit" value="Unfollow">
         </form>
     {% elif user.id != profileUser.id %}
         <form action="{% url 'switch' profileUser.id %}" method="post">
         {% csrf_token %}
             <input type="text"  name="following" hidden value= 'false'>
-            <input type="submit" value="Follow">
+            <input style="margin-left: 7px" type="submit" value="Follow">
         </form>
     {% endif %}
     {% if posts %}
         {% for post in posts %}
             <div class ="post"  >
-                <div id = {{ post.id }}><h3>{{ post.text }}</h3>
+                <a href="/profile/{{ post.user.id }}"><p>{{ post.user }}: </p></a>
+                <div id = {{ post.id }}>
+                    <h3>{{ post.text }}</h3>
                 {% if post.user == user %}
                     <p onclick="edit({{ user.id }},{{ post.id }})" class="edit">Edit</p>
                 {% endif %}

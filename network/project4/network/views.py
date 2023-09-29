@@ -18,7 +18,7 @@ def index(request):
     if request.method == "POST":
         text = request.POST["text"]
         if text:
-            post = Post(user=request.user, text=text, likes=0)
+            post = Post(user=request.user, text=text)
             post.save()
             return HttpResponseRedirect(reverse('index'))
         else:

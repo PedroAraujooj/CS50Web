@@ -9,7 +9,10 @@
     {% if posts %}
         {% for post in posts %}
              <div class ="post"  >
-                <div id = {{ post.id }}><h3>{{ post.text }}</h3>
+                 <a href="/profile/{{ post.user.id }}"><p>{{ post.user }}: </p></a>
+                <div id = {{ post.id }}>
+
+                    <h3>{{ post.text }}</h3>
                 </div>
                 <p>{{ post.date }}</p>
                 <div id="like-{{ post.id }}"><p><img

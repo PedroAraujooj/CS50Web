@@ -11,7 +11,7 @@ class Post(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts")
     text = models.CharField(max_length=999)
     date = models.DateTimeField(auto_now_add=True)
-    likes = models.ManyToManyField(User, related_name='likes', blank=True)
+    likes = models.ManyToManyField(User, related_name='likes', blank=True, serialize=False)
 
     def serialize(self):
         return {
@@ -19,7 +19,6 @@ class Post(models.Model):
             "user": self.user.id,
             "text": self.text,
             "date": self.date,
-            "likes": self.likes
         }
 
 

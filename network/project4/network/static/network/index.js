@@ -6,7 +6,7 @@ const edit = (userId, postId) =>{
         .then(post => {
             if(post.user == userId){
                 document.getElementById(post.id).innerHTML = `<form>
-                <textarea name="text" rows="4" style="width: 100%" id ="edit-text"> ${post.text}</textarea>
+                <textarea name="text" rows="4" style="width: 100%" id ="edit-text">${post.text}</textarea>
                 <br>
                 <input type="submit" class="btn btn-primary" onclick="editPost(event, ${postId}, ${userId})" value="Edit">
                 </form>`;
