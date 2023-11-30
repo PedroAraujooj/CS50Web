@@ -1,0 +1,40 @@
+{% extends "holly/layout.html" %}
+{% load static %}
+
+{% block body %}
+    <div class="main">
+        <div class="searchMain">
+            <div>
+                <img src="{% static "imgs/rj.jpg" %}" alt="" class="imgRj">
+            </div>
+            <div class=search>
+                <div class="searchForm">
+                    <form action="{% url 'index' %}" method="post">
+                        {% csrf_token %}
+                        <label for="religionsSelect">What's your religion?</label><br>
+                        <select name="religionsSelect" id="religionsSelect">
+                            <option value="Protestantism">Protestantism</option>
+                            <option value="Catholicism">Catholicism</option>
+                            <option value="Islam">Islam</option>
+                            <option value="Judaism ">Judaism</option>
+                            <option value="Afro">African religions</option>
+                        </select><br><br>
+                        <label for="localSelect">Which city do you live in Rio de Janeiro state?</label><br>
+                        <select id="localSelect" onchange="loadneighbourhood()">
+                        </select><br><br>
+                        <input type="text" id="localSelectFake" name="city" hidden="hidden">
+
+                        <select id="neighbourhoodSelect" hidden style="margin-bottom: 20px"
+                                onchange="loadSubdistritos()">
+                        </select><br>
+                        <select id="neighbourhoodSelect2" hidden style="margin-bottom: 20px;"
+                                onchange="changeFake(this)">
+                        </select><br>
+                        <input type="text" id="neighbourhoodSelectFake" name="neighbourhood" hidden="hidden">
+                        <input type="submit" value="Find religion entities" class="btn btn, butao">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

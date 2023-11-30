@@ -1,0 +1,14 @@
+{% extends "holly/layout.html" %}
+{% load static %}
+
+
+{% block body %}
+    <div class="main">
+    <h1 class="titulosPags">{{ title }}</h1>
+
+    {% include "holly/entities.html" %}
+    </div>
+    {% include "holly/pagination.html" %}
+
+
+{% endblock %}

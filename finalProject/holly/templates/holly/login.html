@@ -1,0 +1,25 @@
+{% extends "holly/layout.html" %}
+
+{% block body %}
+
+    <h1 class="titulosPags">Login</h1>
+
+    {% if message %}
+        <div>{{ message }}</div>
+    {% endif %}
+    <div class="post">
+    <form action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <input autofocus class="form-control" type="text" name="username" placeholder="Username">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="password" name="password" placeholder="Password">
+        </div>
+        <input class="btn btn, butao" type="submit" value="Login">
+    </form>
+
+    Don't have an account? <a href="{% url 'register' %}">Register here.</a>
+    </div>
+
+{% endblock %}

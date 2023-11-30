@@ -1,0 +1,70 @@
+{% extends "holly/layout.html" %}
+
+{% block body %}
+
+    <h1 class="titulosPags">Register</h1>
+
+    {% if message %}
+        <div>{{ message }}</div>
+    {% endif %}
+    <div class="post">
+    <form action="{% url 'register' %}" method="post" style="margin-left: 21px">
+        {% csrf_token %}
+        <div class="form-group">
+            <input class="form-control" autofocus type="text" name="username" placeholder="Username">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="email" name="email" placeholder="Email Address">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="password" name="password" placeholder="Password">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="password" name="confirmation" placeholder="Confirm Password">
+        </div>
+        <div>
+            <p>Is you a religious entity?</p>
+            <div>
+                <input type="radio" name="isEntity" value="True" onchange="changerRegisterEntity(this)"/>
+                <label for="True">True</label>
+            </div>
+            <div>
+                <input type="radio" name="isEntity" value="False" checked onchange="changerRegisterEntity(this)"/>
+                <label for="False">False</label>
+            </div>
+        </div>
+
+        <div id="registerEntity" hidden>
+            <label for="religion">What's your religion?</label><br>
+            <select name="religion" id="religionsSelect">
+                <option value="Protestantism">Protestantism</option>
+                <option value="Catholicism">Catholicism</option>
+                <option value="Islam">Islam</option>
+                <option value="Judaism">Judaism</option>
+                <option value="Afro">African religions</option>
+            </select><br><br>
+            <label for="localSelect">Where are you in Rio de Janeiro state?</label><br>
+            <select id="localSelect" onchange="loadneighbourhood()">
+            </select><br><br>
+            <input type="text" id="localSelectFake" name = "city" hidden="hidden">
+
+            <select id="neighbourhoodSelect" hidden style="margin-bottom: 20px" onchange="loadSubdistritos()" >
+            </select><br>
+            <select id="neighbourhoodSelect2" hidden style="margin-bottom: 20px" onchange="changeFake(this)">
+            </select>
+            <input type="text" id="neighbourhoodSelectFake" name="neighbourhood" hidden="hidden">
+
+            <div class="form-group">
+                <input class="form-control" type="text" name="details" placeholder="details">
+            </div>
+            <label for="text">Make a summary of your religious entity</label><br>
+            <textarea name="text" placeholder="Summary" class="form-control"></textarea>
+            <br>
+        </div>
+        <input class="btn btn, butao" type="submit" value="Register">
+    </form>
+
+    Already have an account? <a href="{% url 'login' %}">Log In here.</a>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "holly/layout.html" %}
+{% load static %}
+
+
+{% block body %}
+    <div class="main">
+    <h1 class="titulosPags">Announcements of entities you are member of</h1>
+
+    {% include "holly/posts.html" %}
+    </div>
+    {% include "holly/pagination.html" %}
+
+
+{% endblock %}

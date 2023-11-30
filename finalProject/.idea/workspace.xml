@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e3693638-c568-4c1e-b20f-a97b51eb1435" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/finalProject.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalProject/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalProject/asgi.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalProject/settings.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalProject/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finalProject/wsgi.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/holly/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/holly/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/holly/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/holly/migrations/0001_initial.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/holly/migrations/0002_user_text_delete_comment.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/holly/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/holly/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/holly/static/holly/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/holly/static/holly/styles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/holly/static/imgs/rj.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/holly/templates/holly/entities.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/holly/templates/holly/erro.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/holly/templates/holly/following.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/holly/templates/holly/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/holly/templates/holly/layout.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/holly/templates/holly/login.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/holly/templates/holly/pagination.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/holly/templates/holly/posts.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/holly/templates/holly/profile.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/holly/templates/holly/register.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/holly/templates/holly/resultEntities.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/holly/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/holly/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/holly/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/manage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../commerce/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../commerce/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../network/project4/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/../network/project4/db.sqlite3" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
+  <component name="FlaskConsoleOptions" custom-start-script="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))">
+    <envs>
+      <env key="FLASK_APP" value="app" />
+    </envs>
+    <option name="myCustomStartScript" value="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))" />
+    <option name="myEnvs">
+      <map>
+        <entry key="FLASK_APP" value="app" />
+      </map>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2WHEf0Kfq5uXMgB2OV7ziaVbOyT" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/dev/CS50Web/finalProject/holly/templates/holly",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "vcs.Perforce",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\dev\CS50Web\finalProject\holly\templates\holly" />
+      <recent name="C:\dev\CS50Web\finalProject\holly\static\holly" />
+      <recent name="C:\dev\CS50Web\finalProject\holly\static\imgs" />
+      <recent name="C:\dev\CS50Web\finalProject\holly\static" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\dev\CS50Web\finalProject\holly\static\imgs" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="finalProject" type="Python.DjangoServer" factoryName="Django server">
+      <module name="finalProject" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e3693638-c568-4c1e-b20f-a97b51eb1435" name="Changes" comment="" />
+      <created>1696381206215</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1696381206215</updated>
+      <workItem from="1696381207643" duration="9396000" />
+      <workItem from="1696552666370" duration="5738000" />
+      <workItem from="1696992625159" duration="4073000" />
+      <workItem from="1697414149077" duration="7117000" />
+      <workItem from="1697503712868" duration="94281000" />
+      <workItem from="1699926781600" duration="4276000" />
+      <workItem from="1700617224633" duration="28448000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+</project>

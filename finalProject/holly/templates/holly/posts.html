@@ -1,0 +1,20 @@
+{% load static %}
+
+{% block posts %}
+    {% if posts %}
+        {% for post in posts %}
+            <div class ="post"  >
+                <a href="/profile/{{ post.user.id }}"><h3 class="titulosPags" style="margin-left: 0">{{ post.user | capfirst }}: </h3></a>
+                <p>{{ post.date }}</p>
+                <div id = {{ post.id }}>
+                    <h3>{{ post.text }}</h3>
+                {% if post.user == user %}
+                    <p onclick="edit({{ user.id }},{{ post.id }})" class="btn btn, butao">Edit</p>
+                {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p  class="post">No announcements yet </p>
+    {% endif %}
+{% endblock %}

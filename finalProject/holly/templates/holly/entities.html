@@ -1,0 +1,17 @@
+{% load static %}
+
+{% block entities %}
+    {% if entities %}
+        {% for entitie in entities %}
+            <div class="entities">
+                <div id= {{ entitie.id }}>
+                    <a href="/profile/{{ entitie.id }}"><h3 class="titulosPags" style="margin-left: 0px">{{ entitie | capfirst}}: </h3></a>
+                </div>
+                <p style="display: inline"> {{ entitie.locations.city }} - {{ entitie.locations.neighbourhood }}
+                        - {{ entitie.locations.details }} </p>
+                <p>Religion: {{ entitie.religions.all.0 }}</p>
+
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endblock %}

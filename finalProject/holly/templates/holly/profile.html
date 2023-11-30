@@ -1,0 +1,97 @@
+{% extends "holly/layout.html" %}
+{% load static %}
+
+{% block body %}
+    <div class="main">
+        <h1 style="padding-left: 7px" class="titulosPags">Religious
+            entity: {{ profileUser.username | capfirst }}</h1>
+        <br>
+        <p style="padding-left: 7px; margin-bottom: 7px" class="titulosPags">Members: {{ followers|length }}</p><br>
+        {% if profileUser.id != user.id %}
+            <div class="entities" id="profileInfo" >
+                <p>&#x2022;Religion: {{ profileUser.religions.all.0 }}</p>
+                <p>&#x2022;Current location: {{ profileUser.locations.city }} - {{ profileUser.locations.neighbourhood }}
+                        - {{ profileUser.locations.details }}</p>
+                <p>&#x2022;Summary: {{ profileUser.text }}</p>
+            </div>
+        {% endif %}
+        {% if user.id != profileUser.id and user in followers %}
+            <form action="{% url 'switch'  profileUser.id %}" method="post">
+                {% csrf_token %}
+                <input type="text" name="following" hidden value='true'>
+                <input style="margin-left: 35px " type="submit" value="Leave" class="btn btn, butao">
+            </form>
+        {% elif user.id != profileUser.id %}
+            <form action="{% url 'switch' profileUser.id %}" method="post">
+                {% csrf_token %}
+                <input type="text" name="following" hidden value='false'>
+                <input style="margin-left: 35px" type="submit" value="Become a member" class="btn btn, butao">
+            </form>
+        {% endif %}
+
+        {% if user.id == profileUser.id %}
+            <div class="entities">
+                <form action="{% url 'editProfile' user.id %}" method="post">
+                    {% csrf_token %}
+                    <h4>Edit entity</h4>
+                    <p>&#x2022;Your current religion: {{ user.religions.all.0 }}</p>
+                    <div id='showReligion'></div>
+
+                    <br>
+                    <p>&#x2022;Your current location: {{ profileUser.locations.city }} - {{ user.locations.neighbourhood }}
+                        - {{ user.locations.details }}</p><br>
+
+                    <div id='showLocation' hidden="hidden">
+                        <label for='localSelect'>Change where you live in Rio de Janeiro state</label><br>
+                        <select id='localSelect' onchange='loadneighbourhood()'>
+                        </select><br><br>
+                        <input type='text' id='localSelectFake' name='city' hidden='hidden'>
+
+                        <select id='neighbourhoodSelect' hidden style='margin-bottom: 20px'
+                                onchange='loadSubdistritos()'>
+                        </select><br>
+                        <select id='neighbourhoodSelect2' hidden style='margin-bottom: 20px'
+                                onchange='changeFake(this)'>
+                        </select>
+                        <input type='text' id='neighbourhoodSelectFake' name='neighbourhood' hidden='hidden'>
+
+                        <div class='form-group'>
+                            <p>Change details: </p>
+                            <input class='form-control' type='text' value='{{ user.locations.details }}' name="details">
+                        </div>
+                        <br>
+                    </div>
+                     <p>&#x2022;Your current Summary: {{ user.text }}</p>
+                     <button id="editButton" onclick="showLocation(event, this), showReligion(event, this)" class="btn btn, butao">Change</button>
+                    <div id='showSummary' hidden="hidden">
+                        <label for="text">Change the summary</label><br>
+                        <textarea name="text" class="form-control">{{ user.text }}</textarea>
+                    </div>
+                    <div id='showSubmit' hidden="hidden">
+                        <input type="submit" value="Edit" class="btn btn, butao">
+                        <button class="btn btn-danger" onclick="cancelEdit(event)">Cancel Edit</button>
+                    </div>
+
+                </form>
+            </div>
+
+        {% endif %}
+
+        {% if user.id == profileUser.id %}
+        <button id="announceButton" onclick="showAnnounce(event, this)" class="btn btn, butao">Do an Announce</button>
+        <div id="divAnnounce" hidden="hidden">
+            <div class="entities" >
+                <h4>New Announcement</h4>
+                <form action="{% url 'profile' user.id %}" method="post">
+                    {% csrf_token %}
+                    <textarea name="text" rows="4" style="width: 100%"></textarea><br>
+                    <input type="submit" value="Announce" class="btn btn, butao">
+                    <button class="btn btn-danger" onclick="cancelAnnounce(event)">Cancel Announce</button>
+                </form>
+            </div>
+        </div>
+        {% endif %}
+        {% include "holly/posts.html" %}
+    </div>
+    {% include "holly/pagination.html" %}
+{% endblock %}

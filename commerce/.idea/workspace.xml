@@ -5,19 +5,45 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0ef7434a-8b6e-4365-966b-1b050aa891f8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../network/project4/network/static/imgs/no.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../network/project4/network/static/imgs/yes.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../network/project4/network/static/network/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../network/project4/network/templates/network/following.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../finalProject/.idea/finalProject.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../finalProject/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../finalProject/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../finalProject/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../finalProject/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../finalProject/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../finalProject/db.sqlite3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../finalProject/finalProject/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../finalProject/finalProject/asgi.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../finalProject/finalProject/settings.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../finalProject/finalProject/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../finalProject/finalProject/wsgi.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../finalProject/holly/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../finalProject/holly/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../finalProject/holly/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../finalProject/holly/migrations/0001_initial.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../finalProject/holly/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../finalProject/holly/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../finalProject/holly/static/holly/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../finalProject/holly/static/holly/styles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../finalProject/holly/static/imgs/no.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../finalProject/holly/static/imgs/rj.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../finalProject/holly/static/imgs/yesred.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../finalProject/holly/templates/holly/entities.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../finalProject/holly/templates/holly/erro.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../finalProject/holly/templates/holly/following.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../finalProject/holly/templates/holly/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../finalProject/holly/templates/holly/layout.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../finalProject/holly/templates/holly/login.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../finalProject/holly/templates/holly/pagination.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../finalProject/holly/templates/holly/profile.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../finalProject/holly/templates/holly/register.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../finalProject/holly/templates/holly/resultEntities.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../finalProject/holly/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../finalProject/holly/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../finalProject/holly/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../finalProject/manage.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../network/project4/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/../network/project4/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../network/project4/network/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../network/project4/network/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../network/project4/network/static/network/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/../network/project4/network/static/network/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../network/project4/network/templates/network/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../network/project4/network/templates/network/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../network/project4/network/templates/network/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/../network/project4/network/templates/network/layout.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../network/project4/network/templates/network/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/../network/project4/network/templates/network/profile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../network/project4/network/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/../network/project4/network/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../network/project4/network/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/../network/project4/network/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,21 +69,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/dev/commerce/auctions/templates/auctions",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/dev/commerce/auctions/templates/auctions&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\dev\commerce\auctions\templates\auctions" />
@@ -77,6 +103,8 @@
       <workItem from="1689730546757" duration="2649000" />
       <workItem from="1689773004788" duration="55963000" />
       <workItem from="1693348086022" duration="15926000" />
+      <workItem from="1698203833811" duration="3000" />
+      <workItem from="1698203863458" duration="15000" />
     </task>
     <servers />
   </component>

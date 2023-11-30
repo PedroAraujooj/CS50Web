@@ -1,0 +1,91 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title %}Holly.app{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="{% static 'holly/styles.css' %}" rel="stylesheet">
+    <script src="{% static 'holly/index.js' %}" defer></script>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light, navbar">
+    <a class="navbar-brand text-white bg-dark rounded" href="{% url 'index' %}">HOLLY.APP</a>
+
+    <div class="navInterna">
+        <ul class="navbar-nav mr-auto bg-white rounded">
+            {% if user.is_authenticated %}
+                {% if user.isEntity == True %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'profile' user.id %}"><strong>{{ user.username | capfirst }}</strong></a>
+                    </li>
+                {% else %}
+                    <li class="nav-item ">
+                    <strong class="nav-link">{{ user.username | capfirst }}</strong>
+                    </li>
+                {% endif %}
+            {% endif %}
+            <li class="nav-item ">
+                <a class="nav-link" href="{% url 'entities' %}">All Entities</a>
+            </li>
+            {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'following' %}">Announcements</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+                </li>
+            {% else %}
+                <li class="nav-item ">
+                    <a class="nav-link" href="{% url 'login' %}">Log In</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="{% url 'register' %}">Register</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+<div class="navMobile">
+        <ul class="ulItem">
+            {% if user.is_authenticated %}
+                {% if user.isEntity == True %}
+                    <li class=" navItem">
+                        <a  href="{% url 'profile' user.id %}"><strong>{{ user.username | capfirst }}</strong></a>
+                    </li>
+                {% else %}
+                    <li class="navItem ">
+                    <strong >{{ user.username | capfirst }}</strong>
+                    </li>
+                {% endif %}
+            {% endif %}
+            <li class=" navItem ">
+                <a  href="{% url 'entities' %}">All Entities</a>
+            </li>
+            {% if user.is_authenticated %}
+                <li class=" navItem">
+                    <a  href="{% url 'following' %}">Announcements</a>
+                </li>
+                <li class="navItem">
+                    <a  href="{% url 'logout' %}">Log Out</a>
+                </li>
+            {% else %}
+                <li class="navItem ">
+                    <a  href="{% url 'login' %}">Log In</a>
+                </li>
+                <li class="navItem ">
+                    <a  href="{% url 'register' %}">Register</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+
+<div class="body">
+    {% block body %}
+
+    {% endblock %}
+</div>
+</body>
+</html>
