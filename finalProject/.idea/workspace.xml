@@ -5,46 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e3693638-c568-4c1e-b20f-a97b51eb1435" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/finalProject.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/finalProject/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/finalProject/asgi.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/finalProject/settings.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/finalProject/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/finalProject/wsgi.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/holly/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/holly/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/holly/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/holly/migrations/0001_initial.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/holly/migrations/0002_user_text_delete_comment.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/holly/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/holly/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/holly/static/holly/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/holly/static/holly/styles.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/holly/static/imgs/rj.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/holly/templates/holly/entities.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/holly/templates/holly/erro.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/holly/templates/holly/following.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/holly/templates/holly/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/holly/templates/holly/layout.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/holly/templates/holly/login.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/holly/templates/holly/pagination.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/holly/templates/holly/posts.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/holly/templates/holly/profile.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/holly/templates/holly/register.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/holly/templates/holly/resultEntities.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/holly/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/holly/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/holly/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../commerce/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../commerce/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../network/project4/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/../network/project4/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/holly/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/holly/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/holly/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/holly/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -146,7 +111,7 @@
       <workItem from="1697414149077" duration="7117000" />
       <workItem from="1697503712868" duration="94281000" />
       <workItem from="1699926781600" duration="4276000" />
-      <workItem from="1700617224633" duration="28448000" />
+      <workItem from="1700617224633" duration="41248000" />
     </task>
     <servers />
   </component>

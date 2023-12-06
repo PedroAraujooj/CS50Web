@@ -21,26 +21,21 @@ def index(request):
         print(city)
         neighbourhood = request.POST["neighbourhood"]
         print(neighbourhood)
-        user = User.objects.get(pk=request.user.id)
 
-        if not user.isEntity:
-            religion = Religion.objects.get(name=religionsSelect)
-            locations = Location.objects.all().filter(city=city, neighbourhood=neighbourhood)
-            entities = User.objects.all().filter(religions=religion, locations__in=locations)
-            print(religion)
-            print(locations)
-            print(entities.__len__())
-            paginator = Paginator(entities, 5)
-            page_number = request.GET.get('page')
-            page_obj = paginator.get_page(page_number)
-            return render(request, "holly/resultEntities.html", {
-                "entities": page_obj,
-                "title": "Result of search"
-            })
-        else:
-            return render(request, "holly/erro.html", {
-                "error": "Something went wrong"
-            })
+        religion = Religion.objects.get(name=religionsSelect)
+        locations = Location.objects.all().filter(city=city, neighbourhood=neighbourhood)
+        entities = User.objects.all().filter(religions=religion, locations__in=locations)
+        print(religion)
+        print(locations)
+        print(entities.__len__())
+        paginator = Paginator(entities, 5)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        return render(request, "holly/resultEntities.html", {
+            "entities": page_obj,
+            "title": "Result of search"
+        })
+
     else:
         user = User.objects.get(pk=request.user.id)
         if user.isEntity:
@@ -149,6 +144,21 @@ def editProfile(request, userId):
             })
 
 
+def switch(request, userId):
+    if request.method == "POST":
+        following = request.POST["following"]
+        if following == 'true':
+            User.objects.get(pk=request.user.id).following.remove(User.objects.get(pk=userId))
+            return HttpResponseRedirect(reverse('profile', args=(userId,)))
+        elif following == 'false':
+            User.objects.get(pk=request.user.id).following.add(User.objects.get(pk=userId))
+            return HttpResponseRedirect(reverse('profile', args=(userId,)))
+        else:
+            return render(request, "holly/erro.html", {
+                "error": "Something went wrong"
+            })
+
+
 @csrf_exempt
 @login_required
 def edit(request, postId):
@@ -164,28 +174,6 @@ def edit(request, postId):
             return JsonResponse(post.serialize(), safe=False)
         else:
             return JsonResponse({"error": "This post doesn't exist"}, status=400)
-
-
-@csrf_exempt
-@login_required
-def like(request, postId):
-    if request.method == "POST":
-        post = Post.objects.get(pk=postId)
-        user = User.objects.get(pk=request.user.id)
-        print(post.likes.all())
-        print(len(post.likes.all()))
-        if user in post.likes.all():
-            post.likes.remove(user)
-            post.save()
-            print("no")
-            print(len(post.likes.all()))
-            return JsonResponse({"message": "no"}, status=200)
-        else:
-            post.likes.add(user)
-            post.save()
-            print("yes")
-            print(len(post.likes.all()))
-            return JsonResponse({"message": "yes"}, status=200)
 
 
 def login_view(request):

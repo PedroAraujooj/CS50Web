@@ -314,14 +314,321 @@ text; and date.
             return f"{self.text}"
 
 ### -holly.urls.py
+File that contains the URLs (Paths) that are within the array 'urlpatterns' and can 
+be accessed and activate their functions in views.py
 
+    urlpatterns = [
+        path("", views.index, name="index"),
+        path("login", views.login_view, name="login"),
+        path("logout", views.logout_view, name="logout"),
+        path("register", views.register, name="register"),
+        path("profile/<int:userId>", views.profile, name="profile"),
+        path("editProfile/<int:userId>", views.editProfile, name="editProfile"),
+        path("following", views.following, name="following"),
+        path("edit/<postId>", views.edit, name="edit"),
+        path("like/<postId>", views.like, name="like"),
+        path("entities", views.entities, name="entities")
+    ]
+### -holly.views.py
 
+File that contains the python GETs and POSTs functions that will be executed by each
+part of the project, executing different functions.
+These functions are:
 
+#### - *index*: 
+in POST: It will perform a search for entities filtering by location and region, in addition to being paginated.
+Returning the resultEntities.html page with the title "Result of search"
 
+in GET: if it is an entity, it will return the entity's own page; If It is a normal user,
+It will return to the search page
 
+    @login_required(login_url="login")
+    def index(request):
+        if request.method == "POST":
+            religionsSelect = request.POST["religionsSelect"]
+            city = request.POST["city"]
+            print(city)
+            neighbourhood = request.POST["neighbourhood"]
+            print(neighbourhood)
+    
+            religion = Religion.objects.get(name=religionsSelect)
+            locations = Location.objects.all().filter(city=city, neighbourhood=neighbourhood)
+            entities = User.objects.all().filter(religions=religion, locations__in=locations)
+            print(religion)
+            print(locations)
+            print(entities.__len__())
+            paginator = Paginator(entities, 5)
+            page_number = request.GET.get('page')
+            page_obj = paginator.get_page(page_number)
+            return render(request, "holly/resultEntities.html", {
+                "entities": page_obj,
+                "title": "Result of search"
+            })
+    
+        else:
+            user = User.objects.get(pk=request.user.id)
+            if user.isEntity:
+                return profile(request, user.id)
+            else:
+                return render(request, "holly/index.html")
 
+#### - *following*:
+Returns all announcements from entities that the user is a member of, this is rendered on 
+the following.html page, in addition to being paginated
 
+    @login_required(login_url="login")
+    def following(request):
+        user = User.objects.get(pk=request.user.id)
+        print(user.following.all())
+        print(user.following)
+        posts = Post.objects.all().filter(user__in=user.following.all()).order_by('-id')
+        paginator = Paginator(posts, 5)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        return render(request, "holly/following.html", {
+            "posts": page_obj
+        })
 
+#### - *entities*:
+Returns a summary of all entities, this is rendered on 
+the resultEntities.html page with "All entities" as title, in addition to being paginated
 
+    def entities(request):
+        entities = User.objects.all().filter(isEntity=True)
+        paginator = Paginator(entities, 5)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        return render(request, "holly/resultEntities.html", {
+            "entities": page_obj,
+            "title": "All entities"
+        })
 
+#### - *profile*: 
+in POST: First, it checks whether the user is a religious entity, if so, an announcement can be made
+
+in GET: if the user who will have the page returned is an entity (/profile/{id}, that is, the user whose id is
+in the url), Returns all the entity's announces, this is rendered in
+the profile.html page, in addition to being paginated
+
+    @login_required(login_url="login")
+    def profile(request, userId):
+        if request.method == "POST":
+            if request.user.id == userId and User.objects.get(pk=userId).isEntity:
+                text = request.POST["text"]
+                if text:
+                    post = Post(user=request.user, text=text)
+                    post.save()
+                    return HttpResponseRedirect(reverse('profile', args=(userId,)))
+                else:
+                    return render(request, "network/erro.html", {
+                        "error": "You need to put a text in the post"
+                    })
+            else:
+                return render(request, "holly/erro.html", {
+                    "error": "Something went wrong"
+                })
+        else:
+            if User.objects.get(pk=userId).isEntity:
+                print(f"followers: {User.objects.all().filter(following=User.objects.get(pk=userId))} ")
+                print(f"following: {User.objects.get(pk=userId).following} ")
+                posts = Post.objects.all().filter(user=User.objects.get(pk=userId)).order_by('-id')
+                paginator = Paginator(posts, 5)
+                page_number = request.GET.get('page')
+                page_obj = paginator.get_page(page_number)
+                return render(request, "holly/profile.html", {
+                    "posts": page_obj,
+                    "profileUser": User.objects.get(pk=userId),
+                    "followers": User.objects.all().filter(following=User.objects.get(pk=userId))
+                })
+            else:
+                return render(request, "holly/erro.html", {
+                    "error": "Something went wrong"
+                })
+
+#### - *profile*: 
+in POST: First there is validation if the user who made the request is the same one who will have the data 
+edited and if this user is a religious entity, if this is all true, the religion, description and location 
+data will be changed.
+
+    @login_required(login_url="login")
+    def editProfile(request, userId):
+        if request.method == "POST":
+            if request.user.id == userId and User.objects.get(pk=userId).isEntity:
+                user = User.objects.get(pk=userId)
+    
+                try:
+                    religionStr = request.POST["religion"]
+                    try:
+                        user.religions.clear()
+                        user.religions.add(Religion.objects.get(name=religionStr))
+                    except:
+                        religion = Religion(name=religionStr)
+                        religion.save()
+                        user.religions.add(religion)
+                finally:
+                    try:
+                        city = request.POST["city"]
+                        neighbourhood = request.POST["neighbourhood"]
+                        details = request.POST["details"]
+                        text = request.POST["text"]
+                        if city and neighbourhood and details:
+                            location = Location(city=city, neighbourhood=neighbourhood, details=details)
+                            location.save()
+                            user.locations = location
+                        elif details:
+                            user.locations.details = details
+                            user.locations.save()
+                        if text:
+                            user.text = text
+                    finally:
+                        user.save()
+                return HttpResponseRedirect(reverse('profile', args=(userId,)))
+            else:
+                return render(request, "holly/erro.html", {
+                    "error": "Something went wrong"
+                })
+
+#### - *switch*: 
+in POST: Add or remove a user from the list of members of a religious entity
+
+    def switch(request, userId):
+        if request.method == "POST":
+            following = request.POST["following"]
+            if following == 'true':
+                User.objects.get(pk=request.user.id).following.remove(User.objects.get(pk=userId))
+                return HttpResponseRedirect(reverse('profile', args=(userId,)))
+            elif following == 'false':
+                User.objects.get(pk=request.user.id).following.add(User.objects.get(pk=userId))
+                return HttpResponseRedirect(reverse('profile', args=(userId,)))
+            else:
+                return render(request, "holly/erro.html", {
+                    "error": "Something went wrong"
+                })
+
+#### - *switch*: 
+in POST: Add or remove a user from the list of members of a religious entity
+
+    @csrf_exempt
+    @login_required
+    def edit(request, postId):
+        if request.method == "POST":
+            data = json.loads(request.body)
+            post = Post.objects.get(pk=postId)
+            post.text = data.get("text", "")
+            post.save()
+            return JsonResponse({"message": "Post edited successfully."}, status=200)
+        else:
+            post = Post.objects.get(pk=postId)
+            if post:
+                return JsonResponse(post.serialize(), safe=False)
+            else:
+                return JsonResponse({"error": "This post doesn't exist"}, status=400)
+
+#### - *login_view*: 
+Default login function 
+
+    def login_view(request):
+        if request.method == "POST":
+    
+            # Attempt to sign user in
+            username = request.POST["username"]
+            password = request.POST["password"]
+            user = authenticate(request, username=username, password=password)
+    
+            # Check if authentication successful
+            if user is not None:
+                login(request, user)
+                return HttpResponseRedirect(reverse("index"))
+            else:
+                return render(request, "holly/login.html", {
+                    "message": "Invalid username and/or password."
+                })
+        else:
+            return render(request, "holly/login.html")
+
+#### - *logout_view*: 
+Default logout function 
+
+    def logout_view(request):
+        logout(request)
+        return HttpResponseRedirect(reverse("index"))
+
+#### - *register*: 
+in POST: First confirm that the password and password confirmation are the same. 
+After that, it checks whether the user will register as a religious entity or not. If it is a normal user,
+the system creates a new user with just the name, email, password and isEntity as false.
+
+If it is a religious entity, in addition to name, email, password and isEntity as true,
+the user will have their religion added (if it does not exist, it will be created), 
+and their location (another object with city, neighborhood and details).
+
+If the user 
+creation is successful, the system will redirect to the index.html page
+
+in GET: renders the register.html page
+
+    def register(request):
+        if request.method == "POST":
+            username = request.POST["username"]
+            email = request.POST["email"]
+    
+            # Ensure password matches confirmation
+            password = request.POST["password"]
+            confirmation = request.POST["confirmation"]
+            isEntity = request.POST["isEntity"]
+            if password != confirmation:
+                return render(request, "holly/register.html", {
+                    "message": "Passwords must match."
+                })
+            if isEntity == "True":
+                try:
+                    user = User.objects.create_user(username, email, password)
+                    user.isEntity = True
+                    religionStr = request.POST["religion"]
+                    try:
+                        user.religions.add(Religion.objects.get(name=religionStr))
+                    except:
+                        religion = Religion(name=religionStr)
+                        religion.save()
+                        user.religions.add(religion)
+    
+                    city = request.POST["city"]
+                    neighbourhood = request.POST["neighbourhood"]
+                    details = request.POST["details"]
+                    location = Location(city=city, neighbourhood=neighbourhood, details=details)
+                    location.save()
+    
+                    text = request.POST["text"]
+                    user.text = text
+                    user.locations = location
+    
+                    user.save()
+                except IntegrityError:
+                    return render(request, "holly/register.html", {
+                        "message": "Username already taken."
+                    })
+                login(request, user)
+                return HttpResponseRedirect(reverse("index"))
+            # Attempt to create new user
+            else:
+                try:
+                    user = User.objects.create_user(username, email, password)
+                    user.isEntity = False
+                    user.save()
+                except IntegrityError:
+                    return render(request, "holly/register.html", {
+                        "message": "Username already taken."
+                    })
+                login(request, user)
+                return HttpResponseRedirect(reverse("index"))
+    
+        else:
+            return render(request, "holly/register.html")
+
+## How to run the application
+In your terminal, cd into the finalProject directory.
+
+Run python manage.py makemigrations holly to make migrations for the holly app.
+
+Run python manage.py migrate to apply migrations to your database.
 
