@@ -393,7 +393,7 @@ Returns a summary of all entities, this is rendered on
 the resultEntities.html page with "All entities" as title, in addition to being paginated
 
     def entities(request):
-        entities = User.objects.all().filter(isEntity=True)
+        entities = User.objects.all().filter(isEntity=True).order_by('-id')
         paginator = Paginator(entities, 5)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
@@ -537,7 +537,7 @@ If it's a normal user, it will redirect to the index page.
             if user is not None:
                 login(request, user)
                 if user.isEntity:
-                     return HttpResponseRedirect(reverse("profile"))
+                     return HttpResponseRedirect('profile', args=(userId,)))
                 else:
                      return HttpResponseRedirect(reverse("index"))
             else:
@@ -610,7 +610,7 @@ in GET: renders the register.html page
                         "message": "Username already taken."
                     })
                 login(request, user)
-                return HttpResponseRedirect(reverse("profile"))
+                return HttpResponseRedirect('profile', args=(userId,)))
             # Attempt to create new user
             else:
                 try:

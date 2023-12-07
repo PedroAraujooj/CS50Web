@@ -54,7 +54,7 @@ def memberOf(request):
 
 
 def entities(request):
-    entities = User.objects.all().filter(isEntity=True)
+    entities = User.objects.all().filter(isEntity=True).order_by('-id')
     paginator = Paginator(entities, 5)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -181,7 +181,7 @@ def login_view(request):
         if user is not None:
             login(request, user)
             if user.isEntity:
-                return HttpResponseRedirect(reverse("profile"))
+                return HttpResponseRedirect(reverse('profile', args=(user.id,)))
             else:
                 return HttpResponseRedirect(reverse("index"))
         else:
@@ -238,7 +238,7 @@ def register(request):
                     "message": "Username already taken."
                 })
             login(request, user)
-            return HttpResponseRedirect(reverse("profile"))
+            return HttpResponseRedirect(reverse('profile', args=(user.id,)))
         # Attempt to create new user
         else:
             try:
