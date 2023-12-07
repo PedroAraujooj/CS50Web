@@ -32,7 +32,7 @@
             </li>
             {% if user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'following' %}">Announcements</a>
+                    <a class="nav-link" href="{% url 'memberOf' %}">Announcements</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
@@ -66,7 +66,7 @@
             </li>
             {% if user.is_authenticated %}
                 <li class=" navItem">
-                    <a  href="{% url 'following' %}">Announcements</a>
+                    <a  href="{% url 'memberOf' %}">Announcements</a>
                 </li>
                 <li class="navItem">
                     <a  href="{% url 'logout' %}">Log Out</a>

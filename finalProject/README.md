@@ -10,7 +10,7 @@ communication with the faithful.
 all project was made in Django(python) for the back-end, and HTML5/CSS3/JS without any framework, only the CSS bootstrap, for front-end and SQLite for manage the database.
 
 ## SUMMARY
-My program helps religious entities communicate with their followers;
+My program helps religious entities communicate with their members;
 and helps people find the cells of their religions in the regions chosen by them.
 
 For normal users, the home screen will be a form with the religion and a select list with the cities in the state of 'Rio de Janeiro' and their subregions, if any.
@@ -106,21 +106,21 @@ function that makes the edit menu appear and it possible to edit announcements f
 there are other functions that help it, such as the *showAnnounce* and
 *cancelAnnounce* functions, which will act on the appearance of the menu and its cancellation.
 
-    const edit = (userId, postId) => {
-        postId = parseInt(postId);
+    const edit = (userId, announeId) => {
+        announeId = parseInt(announeId);
         userId = parseInt(userId);
-        fetch(`/edit/${postId}`)
+        fetch(`/edit/${announeId}`)
             .then(response => response.json())
-            .then(post => {
-                if (post.user == userId) {
-                    document.getElementById(post.id).innerHTML = `
+            .then(announce => {
+                if (announce.user == userId) {
+                    document.getElementById(announce.id).innerHTML = `
                     <form>
-                    <textarea name="text" rows="4" style="width: 100%" id ="edit-text">${post.text}</textarea>
+                    <textarea name="text" rows="4" style="width: 100%" id ="edit-text">${announce.text}</textarea>
                     <br>
-                    <input type="submit" class="btn btn, butao" onclick="editPost(event, ${postId}, ${userId})" value="Edit">
+                    <input type="submit" class="btn btn, butao" onclick="announceEdit(event, ${announeId}, ${userId})" value="Edit">
                     </form>`;
                 } else {
-                    document.getElementById(post.id).innerHTML = "ERROR";
+                    document.getElementById(announce.id).innerHTML = "ERROR";
                 }
             });
     };
@@ -189,24 +189,24 @@ the neighborhood or subregions if they exist
         console.log("nei " + neighbourhoodSelectFake.value)
     };
 
-#### - *editPost*
+#### - *announceEdit*
 the 'POST' in its name refers to the http request type. Furthermore, it opens an edit
 menu for the entity's data, using a fetch. there are other functions that help it, 
 such as the *showLocation*, *showReligion* and *cancelEdit* functions, 
 which will act on the appearance of the menu and its cancellation.
 
-    const editPost = (event, postId, userId) => {
+    const announceEdit = (event, announeId, userId) => {
         event.preventDefault();
         let text = document.getElementById("edit-text").value;
-        fetch(`/edit/${postId}`, {
+        fetch(`/edit/${announeId}`, {
             method: 'POST',
             body: JSON.stringify({
                 text: text
             })
         }).then(response => response.json()).then(result => {
             console.log(result);
-            document.getElementById(`${postId}`).innerHTML = `<h3>${text}</h3>
-                                                                        <p onclick="edit(${userId},${postId})" class="btn btn, butao">Edit</p>`
+            document.getElementById(`${announeId}`).innerHTML = `<h3>${text}</h3>
+                                                                        <p onclick="edit(${userId},${announeId})" class="btn btn, butao">Edit</p>`
         });
     };
 
@@ -226,7 +226,7 @@ entity that appears in a search. This template is used by other pages;
 
 *-erro.html*: generic error page that receives a message depending on the request;
 
-*-following.html*: Page that shows all entities the user is member of; 
+*-memberOf.html*: Page that shows all entities the user is member of; 
 
 *-index.html*: Page that allows the user to search for entities by location and religion;
 
@@ -237,7 +237,7 @@ entity that appears in a search. This template is used by other pages;
 *-pagination.html*: block that contains the standard structure of a pagination
  that appears at the bottom of the page. This template is used by other pages;
 
-*-posts.html*: block that contains the standard structure of an announcement 
+*-announces.html*: block that contains the standard structure of an announcement 
  that appears in profile page and announcements page;
 
 *-profile.html*: page that shows a user's data and advertisements if it is an entity.
@@ -271,7 +271,7 @@ containing the elements: 'city', 'neighborhood' and 'details'
 *--class User* : 
 class that abstracts users, which extends the AbstractUser class and contains the elements:
 
-following: which is a ManyToMany relationship with other
+memberOf: which is a ManyToMany relationship with other
 users and represents the entities that the user is a member of;
 
 isEntity: boolean that indicates whether the user is an entity;
@@ -286,21 +286,21 @@ text: represents a brief description of the entity, it
 will only exist if the user is an entity;
 
     class User(AbstractUser):
-        following = models.ManyToManyField('self', blank=True, symmetrical=False)
+        memberOf = models.ManyToManyField('self', blank=True, symmetrical=False)
         isEntity = models.BooleanField(default=False)
         religions = models.ManyToManyField(Religion, blank=True, symmetrical=False)
         locations = models.ForeignKey(Location, on_delete=models.CASCADE, related_name="userEntitys", blank=True, null=True)
         text = models.CharField(max_length=999)
 
-*--class Post*: 
+*--class Announce*: 
 class that abstracts the announces of an entity user. containing the elements: 
 
 user: a ForeingKey for user;
 
 text; and date.
 
-    class Post(models.Model):
-        user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts")
+    class Announce(models.Model):
+        user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="announces")
         text = models.CharField(max_length=999)
         date = models.DateTimeField(auto_now_add=True)
         def serialize(self):
@@ -324,9 +324,8 @@ be accessed and activate their functions in views.py
         path("register", views.register, name="register"),
         path("profile/<int:userId>", views.profile, name="profile"),
         path("editProfile/<int:userId>", views.editProfile, name="editProfile"),
-        path("following", views.following, name="following"),
-        path("edit/<postId>", views.edit, name="edit"),
-        path("like/<postId>", views.like, name="like"),
+        path("memberOf", views.memberOf, name="memberOf"),
+        path("edit/<announceId>", views.edit, name="edit"),
         path("entities", views.entities, name="entities")
     ]
 ### -holly.views.py
@@ -339,7 +338,7 @@ These functions are:
 in POST: It will perform a search for entities filtering by location and region, in addition to being paginated.
 Returning the resultEntities.html page with the title "Result of search"
 
-in GET: if it is an entity, it will return the entity's own page; If It is a normal user,
+in GET:
 It will return to the search page
 
     @login_required(login_url="login")
@@ -372,21 +371,21 @@ It will return to the search page
             else:
                 return render(request, "holly/index.html")
 
-#### - *following*:
+#### - *memberOf*:
 Returns all announcements from entities that the user is a member of, this is rendered on 
-the following.html page, in addition to being paginated
+the memberOf.html page, in addition to being paginated
 
     @login_required(login_url="login")
-    def following(request):
+    def memberOf(request):
         user = User.objects.get(pk=request.user.id)
-        print(user.following.all())
-        print(user.following)
-        posts = Post.objects.all().filter(user__in=user.following.all()).order_by('-id')
-        paginator = Paginator(posts, 5)
+        print(user.memberOf.all())
+        print(user.memberOf)
+        announces = Announce.objects.all().filter(user__in=user.memberOf.all()).order_by('-id')
+        paginator = Paginator(announces, 5)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
-        return render(request, "holly/following.html", {
-            "posts": page_obj
+        return render(request, "holly/memberOf.html", {
+            "announces": page_obj
         })
 
 #### - *entities*:
@@ -416,12 +415,12 @@ the profile.html page, in addition to being paginated
             if request.user.id == userId and User.objects.get(pk=userId).isEntity:
                 text = request.POST["text"]
                 if text:
-                    post = Post(user=request.user, text=text)
-                    post.save()
+                    announce = Announce(user=request.user, text=text)
+                    announce.save()
                     return HttpResponseRedirect(reverse('profile', args=(userId,)))
                 else:
                     return render(request, "network/erro.html", {
-                        "error": "You need to put a text in the post"
+                        "error": "You need to put a text in the announce"
                     })
             else:
                 return render(request, "holly/erro.html", {
@@ -429,23 +428,21 @@ the profile.html page, in addition to being paginated
                 })
         else:
             if User.objects.get(pk=userId).isEntity:
-                print(f"followers: {User.objects.all().filter(following=User.objects.get(pk=userId))} ")
-                print(f"following: {User.objects.get(pk=userId).following} ")
-                posts = Post.objects.all().filter(user=User.objects.get(pk=userId)).order_by('-id')
-                paginator = Paginator(posts, 5)
+                announces = Announce.objects.all().filter(user=User.objects.get(pk=userId)).order_by('-id')
+                paginator = Paginator(announces, 5)
                 page_number = request.GET.get('page')
                 page_obj = paginator.get_page(page_number)
                 return render(request, "holly/profile.html", {
-                    "posts": page_obj,
+                    "announces": page_obj,
                     "profileUser": User.objects.get(pk=userId),
-                    "followers": User.objects.all().filter(following=User.objects.get(pk=userId))
+                    "members": User.objects.all().filter(memberOf=User.objects.get(pk=userId))
                 })
             else:
                 return render(request, "holly/erro.html", {
                     "error": "Something went wrong"
                 })
 
-#### - *profile*: 
+#### - *editProfile*: 
 in POST: First there is validation if the user who made the request is the same one who will have the data 
 edited and if this user is a religious entity, if this is all true, the religion, description and location 
 data will be changed.
@@ -493,39 +490,40 @@ in POST: Add or remove a user from the list of members of a religious entity
 
     def switch(request, userId):
         if request.method == "POST":
-            following = request.POST["following"]
-            if following == 'true':
-                User.objects.get(pk=request.user.id).following.remove(User.objects.get(pk=userId))
+            memberOf = request.POST["memberOf"]
+            if memberOf == 'true':
+                User.objects.get(pk=request.user.id).memberOf.remove(User.objects.get(pk=userId))
                 return HttpResponseRedirect(reverse('profile', args=(userId,)))
-            elif following == 'false':
-                User.objects.get(pk=request.user.id).following.add(User.objects.get(pk=userId))
+            elif memberOf == 'false':
+                User.objects.get(pk=request.user.id).memberOf.add(User.objects.get(pk=userId))
                 return HttpResponseRedirect(reverse('profile', args=(userId,)))
             else:
                 return render(request, "holly/erro.html", {
                     "error": "Something went wrong"
                 })
 
-#### - *switch*: 
+#### - *edit*: 
 in POST: Add or remove a user from the list of members of a religious entity
 
     @csrf_exempt
     @login_required
-    def edit(request, postId):
+    def edit(request, announceId):
         if request.method == "POST":
             data = json.loads(request.body)
-            post = Post.objects.get(pk=postId)
-            post.text = data.get("text", "")
-            post.save()
-            return JsonResponse({"message": "Post edited successfully."}, status=200)
+            announce = Announce.objects.get(pk=announceId)
+            announce.text = data.get("text", "")
+            announce.save()
+            return JsonResponse({"message": "Announce edited successfully."}, status=200)
         else:
-            post = Post.objects.get(pk=postId)
-            if post:
-                return JsonResponse(post.serialize(), safe=False)
+            announce = Announce.objects.get(pk=announceId)
+            if announce:
+                return JsonResponse(announce.serialize(), safe=False)
             else:
-                return JsonResponse({"error": "This post doesn't exist"}, status=400)
+                return JsonResponse({"error": "This announce doesn't exist"}, status=400)
 
 #### - *login_view*: 
-Default login function 
+Default login function. In the end, if the user is an entity, it will redirect to the profile page. 
+If it's a normal user, it will redirect to the index page.
 
     def login_view(request):
         if request.method == "POST":
@@ -538,7 +536,10 @@ Default login function
             # Check if authentication successful
             if user is not None:
                 login(request, user)
-                return HttpResponseRedirect(reverse("index"))
+                if user.isEntity:
+                     return HttpResponseRedirect(reverse("profile"))
+                else:
+                     return HttpResponseRedirect(reverse("index"))
             else:
                 return render(request, "holly/login.html", {
                     "message": "Invalid username and/or password."
@@ -563,7 +564,8 @@ the user will have their religion added (if it does not exist, it will be create
 and their location (another object with city, neighborhood and details).
 
 If the user 
-creation is successful, the system will redirect to the index.html page
+creation is successful and the user is an entity, it will redirect to the profile page. But
+if it's a normal user, it will redirect to the index page.
 
 in GET: renders the register.html page
 
@@ -608,7 +610,7 @@ in GET: renders the register.html page
                         "message": "Username already taken."
                     })
                 login(request, user)
-                return HttpResponseRedirect(reverse("index"))
+                return HttpResponseRedirect(reverse("profile"))
             # Attempt to create new user
             else:
                 try:
@@ -626,6 +628,8 @@ in GET: renders the register.html page
             return render(request, "holly/register.html")
 
 ## How to run the application
+First of all, install Django with pip3 install Django.
+
 In your terminal, cd into the finalProject directory.
 
 Run python manage.py makemigrations holly to make migrations for the holly app.

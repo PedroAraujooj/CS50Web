@@ -35,21 +35,21 @@ function esperarPorTempo(tempoEmMilissegundos) {
     });
 }
 
-const edit = (userId, postId) => {
-    postId = parseInt(postId);
+const edit = (userId, announeId) => {
+    announeId = parseInt(announeId);
     userId = parseInt(userId);
-    fetch(`/edit/${postId}`)
+    fetch(`/edit/${announeId}`)
         .then(response => response.json())
-        .then(post => {
-            if (post.user == userId) {
-                document.getElementById(post.id).innerHTML = `
+        .then(announce => {
+            if (announce.user == userId) {
+                document.getElementById(announce.id).innerHTML = `
                 <form>
-                <textarea name="text" rows="4" style="width: 100%" id ="edit-text">${post.text}</textarea>
+                <textarea name="text" rows="4" style="width: 100%" id ="edit-text">${announce.text}</textarea>
                 <br>
-                <input type="submit" class="btn btn, butao" onclick="editPost(event, ${postId}, ${userId})" value="Edit">
+                <input type="submit" class="btn btn, butao" onclick="announceEdit(event, ${announeId}, ${userId})" value="Edit">
                 </form>`;
             } else {
-                document.getElementById(post.id).innerHTML = "ERROR";
+                document.getElementById(announce.id).innerHTML = "ERROR";
             }
         });
 };
@@ -109,18 +109,18 @@ const changeFake = (node) => {
     neighbourhoodSelectFake.value = subdistrito.options[subdistrito.selectedIndex].dataset.nome;
     console.log("nei " + neighbourhoodSelectFake.value)
 };
-const editPost = (event, postId, userId) => {
+const announceEdit = (event, announeId, userId) => {
     event.preventDefault();
     let text = document.getElementById("edit-text").value;
-    fetch(`/edit/${postId}`, {
+    fetch(`/edit/${announeId}`, {
         method: 'POST',
         body: JSON.stringify({
             text: text
         })
     }).then(response => response.json()).then(result => {
         console.log(result);
-        document.getElementById(`${postId}`).innerHTML = `<h3>${text}</h3>
-                                                                    <p onclick="edit(${userId},${postId})" class="btn btn, butao">Edit</p>`
+        document.getElementById(`${announeId}`).innerHTML = `<h3>${text}</h3>
+                                                                    <p onclick="edit(${userId},${announeId})" class="btn btn, butao">Edit</p>`
     });
 };
 

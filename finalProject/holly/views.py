@@ -9,8 +9,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 
-from .models import Post, User, Location, Religion
-
+from .models import Announce, User, Location, Religion
 
 # Create your views here.
 @login_required(login_url="login")
@@ -37,24 +36,20 @@ def index(request):
         })
 
     else:
-        user = User.objects.get(pk=request.user.id)
-        if user.isEntity:
-            return profile(request, user.id)
-        else:
-            return render(request, "holly/index.html")
+        return render(request, "holly/index.html")
 
 
 @login_required(login_url="login")
-def following(request):
+def memberOf(request):
     user = User.objects.get(pk=request.user.id)
-    print(user.following.all())
-    print(user.following)
-    posts = Post.objects.all().filter(user__in=user.following.all()).order_by('-id')
-    paginator = Paginator(posts, 5)
+    print(user.memberOf.all())
+    print(user.memberOf)
+    announces = Announce.objects.all().filter(user__in=user.memberOf.all()).order_by('-id')
+    paginator = Paginator(announces, 5)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    return render(request, "holly/following.html", {
-        "posts": page_obj
+    return render(request, "holly/memberOf.html", {
+        "announces": page_obj
     })
 
 
@@ -75,12 +70,12 @@ def profile(request, userId):
         if request.user.id == userId and User.objects.get(pk=userId).isEntity:
             text = request.POST["text"]
             if text:
-                post = Post(user=request.user, text=text)
-                post.save()
+                announce = Announce(user=request.user, text=text)
+                announce.save()
                 return HttpResponseRedirect(reverse('profile', args=(userId,)))
             else:
                 return render(request, "network/erro.html", {
-                    "error": "You need to put a text in the post"
+                    "error": "You need to put a text in the announce"
                 })
         else:
             return render(request, "holly/erro.html", {
@@ -88,16 +83,14 @@ def profile(request, userId):
             })
     else:
         if User.objects.get(pk=userId).isEntity:
-            print(f"followers: {User.objects.all().filter(following=User.objects.get(pk=userId))} ")
-            print(f"following: {User.objects.get(pk=userId).following} ")
-            posts = Post.objects.all().filter(user=User.objects.get(pk=userId)).order_by('-id')
-            paginator = Paginator(posts, 5)
+            announces = Announce.objects.all().filter(user=User.objects.get(pk=userId)).order_by('-id')
+            paginator = Paginator(announces, 5)
             page_number = request.GET.get('page')
             page_obj = paginator.get_page(page_number)
             return render(request, "holly/profile.html", {
-                "posts": page_obj,
+                "announces": page_obj,
                 "profileUser": User.objects.get(pk=userId),
-                "followers": User.objects.all().filter(following=User.objects.get(pk=userId))
+                "members": User.objects.all().filter(memberOf=User.objects.get(pk=userId))
             })
         else:
             return render(request, "holly/erro.html", {
@@ -146,12 +139,12 @@ def editProfile(request, userId):
 
 def switch(request, userId):
     if request.method == "POST":
-        following = request.POST["following"]
-        if following == 'true':
-            User.objects.get(pk=request.user.id).following.remove(User.objects.get(pk=userId))
+        memberOf = request.POST["memberOf"]
+        if memberOf == 'true':
+            User.objects.get(pk=request.user.id).memberOf.remove(User.objects.get(pk=userId))
             return HttpResponseRedirect(reverse('profile', args=(userId,)))
-        elif following == 'false':
-            User.objects.get(pk=request.user.id).following.add(User.objects.get(pk=userId))
+        elif memberOf == 'false':
+            User.objects.get(pk=request.user.id).memberOf.add(User.objects.get(pk=userId))
             return HttpResponseRedirect(reverse('profile', args=(userId,)))
         else:
             return render(request, "holly/erro.html", {
@@ -161,19 +154,19 @@ def switch(request, userId):
 
 @csrf_exempt
 @login_required
-def edit(request, postId):
+def edit(request, announceId):
     if request.method == "POST":
         data = json.loads(request.body)
-        post = Post.objects.get(pk=postId)
-        post.text = data.get("text", "")
-        post.save()
-        return JsonResponse({"message": "Post edited successfully."}, status=200)
+        announce = Announce.objects.get(pk=announceId)
+        announce.text = data.get("text", "")
+        announce.save()
+        return JsonResponse({"message": "Announce edited successfully."}, status=200)
     else:
-        post = Post.objects.get(pk=postId)
-        if post:
-            return JsonResponse(post.serialize(), safe=False)
+        announce = Announce.objects.get(pk=announceId)
+        if announce:
+            return JsonResponse(announce.serialize(), safe=False)
         else:
-            return JsonResponse({"error": "This post doesn't exist"}, status=400)
+            return JsonResponse({"error": "This announce doesn't exist"}, status=400)
 
 
 def login_view(request):
@@ -187,7 +180,10 @@ def login_view(request):
         # Check if authentication successful
         if user is not None:
             login(request, user)
-            return HttpResponseRedirect(reverse("index"))
+            if user.isEntity:
+                return HttpResponseRedirect(reverse("profile"))
+            else:
+                return HttpResponseRedirect(reverse("index"))
         else:
             return render(request, "holly/login.html", {
                 "message": "Invalid username and/or password."
@@ -242,7 +238,7 @@ def register(request):
                     "message": "Username already taken."
                 })
             login(request, user)
-            return HttpResponseRedirect(reverse("index"))
+            return HttpResponseRedirect(reverse("profile"))
         # Attempt to create new user
         else:
             try:

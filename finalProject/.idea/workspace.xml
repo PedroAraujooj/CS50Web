@@ -5,9 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e3693638-c568-4c1e-b20f-a97b51eb1435" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/holly/templates/holly/announces.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/holly/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/holly/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/holly/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/holly/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/holly/static/holly/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/holly/static/holly/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/holly/templates/holly/following.html" beforeDir="false" afterPath="$PROJECT_DIR$/holly/templates/holly/memberOf.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/holly/templates/holly/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/holly/templates/holly/layout.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/holly/templates/holly/posts.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/holly/templates/holly/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/holly/templates/holly/profile.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/holly/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/holly/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/holly/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/holly/views.py" afterDir="false" />
     </list>
@@ -57,7 +66,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "vcs.Perforce",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -111,7 +120,7 @@
       <workItem from="1697414149077" duration="7117000" />
       <workItem from="1697503712868" duration="94281000" />
       <workItem from="1699926781600" duration="4276000" />
-      <workItem from="1700617224633" duration="41248000" />
+      <workItem from="1700617224633" duration="46162000" />
     </task>
     <servers />
   </component>

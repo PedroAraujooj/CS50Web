@@ -6,7 +6,7 @@
         <h1 style="padding-left: 7px" class="titulosPags">Religious
             entity: {{ profileUser.username | capfirst }}</h1>
         <br>
-        <p style="padding-left: 7px; margin-bottom: 7px" class="titulosPags">Members: {{ followers|length }}</p><br>
+        <p style="padding-left: 7px; margin-bottom: 7px" class="titulosPags">Members: {{ members|length }}</p><br>
         {% if profileUser.id != user.id %}
             <div class="entities" id="profileInfo" >
                 <p>&#x2022;Religion: {{ profileUser.religions.all.0 }}</p>
@@ -15,16 +15,16 @@
                 <p>&#x2022;Summary: {{ profileUser.text }}</p>
             </div>
         {% endif %}
-        {% if user.id != profileUser.id and user in followers %}
+        {% if user.id != profileUser.id and user in members %}
             <form action="{% url 'switch'  profileUser.id %}" method="post">
                 {% csrf_token %}
-                <input type="text" name="following" hidden value='true'>
+                <input type="text" name="memberOf" hidden value='true'>
                 <input style="margin-left: 35px " type="submit" value="Leave" class="btn btn, butao">
             </form>
         {% elif user.id != profileUser.id %}
             <form action="{% url 'switch' profileUser.id %}" method="post">
                 {% csrf_token %}
-                <input type="text" name="following" hidden value='false'>
+                <input type="text" name="memberOf" hidden value='false'>
                 <input style="margin-left: 35px" type="submit" value="Become a member" class="btn btn, butao">
             </form>
         {% endif %}
@@ -91,7 +91,7 @@
             </div>
         </div>
         {% endif %}
-        {% include "holly/posts.html" %}
+        {% include "holly/announces.html" %}
     </div>
     {% include "holly/pagination.html" %}
 {% endblock %}

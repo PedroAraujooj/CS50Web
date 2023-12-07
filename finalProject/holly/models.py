@@ -19,15 +19,15 @@ class Location(models.Model):
 
 
 class User(AbstractUser):
-    following = models.ManyToManyField('self', blank=True, symmetrical=False)
+    memberOf = models.ManyToManyField('self', blank=True, symmetrical=False)
     isEntity = models.BooleanField(default=False)
     religions = models.ManyToManyField(Religion, blank=True, symmetrical=False)
     locations = models.ForeignKey(Location, on_delete=models.CASCADE, related_name="userEntitys", blank=True, null=True)
     text = models.CharField(max_length=999)
 
 
-class Post(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts")
+class Announce(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="announces")
     text = models.CharField(max_length=999)
     date = models.DateTimeField(auto_now_add=True)
 
